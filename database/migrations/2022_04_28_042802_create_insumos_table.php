@@ -13,11 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::create('insumo', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_tipo_insumo');
+            $table->string('codigo', 200);
+            $table->string('nombre', 200);
+            $table->integer('es_reactivo');
             $table->integer('estado')->default(1);
-            $table->unsignedBigInteger('id_rol')->nullable();
+            $table->timestamps();
 
-            $table->foreign('id_rol')->references('id')->on('rol');
+            
+            $table->foreign('id_tipo_insumo')->references('id')->on('tipo_insumo');
         });
     }
 
@@ -28,10 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['estado']);
-            $table->dropForeign(['id_rol']);
-            $table->dropColumn(['id_rol']);
-        });
+        Schema::dropIfExists('insumo');
     }
 };
