@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,12 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('usuario', UsuarioController::class);
+Route::resource('tecnico', UsuarioController::class);
+Route::resource('proveedor', UsuarioController::class);
+Route::resource('paciente', UsuarioController::class);
+Route::resource('medicoReferente', UsuarioController::class);
+Route::resource('loteInsumo', UsuarioController::class);
+Route::resource('insumo', UsuarioController::class);
+Route::resource('examen', UsuarioController::class);

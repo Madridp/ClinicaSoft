@@ -252,14 +252,57 @@ return [
             'url'  => 'admin',
             'icon' => 'fas fa-fw fa-home',
         ],
+        ['header' => 'CONFIGURACIÓN USUARIOS'],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Crear un nuevo usuario',
+            'url'  => 'usuario/create',
+            'icon' => "fa fa-user-plus",
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text' => 'Consultar usuarios',
+            'url'  => 'usuario/show',
+            'icon' => "fa fa-user",
+        ],
+        [
+            'text' => 'Desactivar usuario',
+            'url'  => 'usuario/delete',
+            'icon' => "fa fa-user-times",
+        ],
+        ['header' => 'MÓDULOS'],
+        [
+            'text' => 'Pacientes',
+            'url'  => 'paciente/index',
+            'icon' => "fa fa-users",
+        ],
+        [
+            'text' => 'Inventario de insumos',
+            'url'  => 'insumo/index',
+            'icon' => "fa fa-medkit",
+        ],
+        [
+            'text' => 'Lote de insumos',
+            'url'  => 'loteInsumo/index',
+            'icon' => "fa fa-cart-plus",
+        ],
+        [
+            'text' => 'Técnicos',
+            'url'  => 'tecnico/index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Médicos referentes',
+            'url'  => 'medicoReferente/index',
+            'icon' => "fa fa-address-book",
+        ],
+        [
+            'text' => 'Proveedores',
+            'url'  => 'proveedor/index',
+            'icon' => "fa fa-user-circle",
+        ],
+       
+        [
+            'text'        => 'Exámenes',
+            'url'         => 'examen/index',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
@@ -267,7 +310,7 @@ return [
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -275,7 +318,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
+       /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
@@ -312,8 +355,8 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
-        ['header' => 'labels'],
+        ],*/
+       /* ['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -328,7 +371,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*

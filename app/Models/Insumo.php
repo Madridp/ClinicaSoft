@@ -8,4 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Insumo extends Model
 {
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'insumo';
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id_tipo_insumo',
+        'codigo',
+        'nombre',
+        'es_reactivo',
+        'estado'
+    ];
 }

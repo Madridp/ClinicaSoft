@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Bienvenidos al panel del administrador.</p>
 @stop
 
 @section('css')
@@ -17,8 +17,8 @@
 @section('js')
     <script>
         Swal.fire(
-            'Good job!',
-            'You clicked the button',
+            'Bienvenido!',
+            '',
             'success'
         )
     </script>

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
-class InsumoController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +27,11 @@ class InsumoController extends Controller
      */
     public function create()
     {
-      
+        $roles = Rol::all();
+
+        return view('usuario.create', [
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -34,7 +42,22 @@ class InsumoController extends Controller
      */
     public function store(Request $request)
     {
-      
+        //User::create($request->all());
+
+        $this->validate($request,[
+            'name' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required|confirmed'
+        ]);
+        
+            $usuario=User::create($request->merge([
+                'password'=>Hash::make($request['password'])])->all());
+
+        //si se registro el usuario
+        if($usuario){
+            return redirect()->route('admin');}else{
+                return redirect()->back();
+            }
     }
 
     /**
@@ -43,9 +66,16 @@ class InsumoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $sql = 'SELECT * FROM users';
+        $users = DB::select($sql);
+        //$users = User::all();
+        $roles = Rol::all();
+        return view('usuario.show', [
+            'roles' => $roles,
+            'users' => $users
+        ]);
     }
 
     /**

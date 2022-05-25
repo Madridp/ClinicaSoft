@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,7 +27,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'estado', 'id_rol'
     ];
 
     /**
@@ -68,6 +69,6 @@ class User extends Authenticatable
     }
 
     public function adminlte_profile_url(){
-        return 'profile/username';
+        return 'user/profile';
     }
 }
