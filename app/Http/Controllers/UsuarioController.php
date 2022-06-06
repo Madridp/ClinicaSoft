@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,15 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+         //$sql = 'SELECT * FROM users';
+      //  $users = DB::select($sql);
+      $users = User::where('estado', '=', 1)->get();
+      //$users = User::all();
+     // $roles = Rol::all();
+      return view('usuario.index', [
+        //  'roles' => $roles,
+          'users' => $users
+      ]);
     }
 
     /**
@@ -66,16 +75,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $sql = 'SELECT * FROM users';
-        $users = DB::select($sql);
-        //$users = User::all();
-        $roles = Rol::all();
-        return view('usuario.show', [
-            'roles' => $roles,
-            'users' => $users
-        ]);
+      
     }
 
     /**
@@ -86,7 +88,18 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $user = User::findOrFail($id);
+        $roles = Rol::all();
+        //$users = User::where('estado', '=', 1)->get();
+        
+        return view('usuario.edit',  [
+            'roles' => $roles,
+            'user' => $user
+          ]);
+         // dd('aca LLEGA JEJE');
+         
+          
     }
 
     /**
@@ -98,7 +111,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:users',
+            'email' => 'required|unique:users'
+            
+        ]);
+        
+            $usuario= User::whereId($id)->update($validatedData);
+
+        //si se edito el usuario
+        return redirect('/usuario/index')->with('Listo', 'Usuario editado correctamente');
     }
 
     /**
@@ -109,6 +131,14 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $id_au = Auth::id();
+        if($user->id==$id_au){
+            return redirect('/usuario/index')->with('No se puede eliminar el usuario');
+        }else{
+        $user->estado = 0; // eliminado
+        $user->update();
+        }
+        return redirect('/usuario/index')->with('Listo', 'Usuario eliminado correctamente');
     }
 }

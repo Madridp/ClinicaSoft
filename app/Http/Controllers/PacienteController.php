@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class PacienteController extends Controller
@@ -13,7 +14,11 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $pacientes = Paciente::where('estado', '=', 1)->get();
+
+        return view('paciente.index', [
+            'pacientes' => $pacientes
+        ]);
     }
 
     /**
@@ -23,7 +28,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
-      
+      return view('paciente.create');
     }
 
     /**
@@ -34,7 +39,17 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-      
+      $this->validate($request,[
+        'nombre' => 'required',
+        'apellido' => 'required',
+        'genero' => 'required',
+        'telefono' => 'required',
+      ]);
+
+      $paciente=Paciente::create($request->validate());
+
+      return redirect('/paciente/index')->with('Listo', 'paciente creado correctamente');
+
     }
 
     /**
@@ -45,7 +60,7 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -56,7 +71,11 @@ class PacienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+
+        return view('paciente.edit', [
+            'paciente' => $paciente
+        ]);
     }
 
     /**
@@ -68,7 +87,16 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'genero' => 'required',
+            'telefono' => 'required',
+        ]);
+
+        $paciente= Paciente::whereId($id)->update($validatedData);
+
+        return redirect('/usuario/index')->with('Listo', 'Paciente editado correctamente');
     }
 
     /**
@@ -79,6 +107,11 @@ class PacienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        
+        $paciente->estado = 0;
+        $paciente->update();
+
+        return redirect('/paciente/index')->with('Listo', 'Paciente eliminado correctamente');
     }
 }

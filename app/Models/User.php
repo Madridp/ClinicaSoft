@@ -21,6 +21,11 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public function rol()
+    {
+        return $this->hasOne(Rol::class,'id', 'id_rol');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

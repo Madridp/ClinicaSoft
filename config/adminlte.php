@@ -260,18 +260,13 @@ return [
         ],
         [
             'text' => 'Consultar usuarios',
-            'url'  => 'usuario/show',
+            'url'  => 'usuario/index',
             'icon' => "fa fa-user",
-        ],
-        [
-            'text' => 'Desactivar usuario',
-            'url'  => 'usuario/delete',
-            'icon' => "fa fa-user-times",
         ],
         ['header' => 'MÓDULOS'],
         [
             'text' => 'Pacientes',
-            'url'  => 'paciente/index',
+            'url'  => '/paciente/index',
             'icon' => "fa fa-users",
         ],
         [

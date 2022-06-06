@@ -14,6 +14,7 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
+                <th></th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -23,8 +24,16 @@
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->id_rol}}</td>
-                <td>Editar   |    Borrar</td>
+                <td>{{$user->rol ?
+                    $user->rol->nombre:""}}</td>
+                 <td><a href="{{ route('usuario.edit', $user->id)}}" class="btn btn-primary">Editar</a></td>
+                 <td>
+                     <form action="{{ route('usuario.destroy', $user->id)}}" method="post">
+                       @csrf
+                       @method('DELETE')
+                       <button class="btn btn-danger" type="submit">Eliminar</button>
+                     </form>
+                 </td>
             </tr>
             @endforeach
         </tbody>
