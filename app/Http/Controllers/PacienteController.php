@@ -14,6 +14,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
+        dd('aca LLEGA JEJE');
         $pacientes = Paciente::where('estado', '=', 1)->get();
 
         return view('paciente.index', [
@@ -48,7 +49,7 @@ class PacienteController extends Controller
 
       $paciente=Paciente::create($request->validate());
 
-      return redirect('/paciente/index')->with('Listo', 'paciente creado correctamente');
+      return redirect('/paciente')->with('Listo', 'paciente creado correctamente');
 
     }
 
@@ -96,7 +97,7 @@ class PacienteController extends Controller
 
         $paciente= Paciente::whereId($id)->update($validatedData);
 
-        return redirect('/usuario/index')->with('Listo', 'Paciente editado correctamente');
+        return redirect('paciente')->with('Listo', 'Paciente editado correctamente');
     }
 
     /**
@@ -112,6 +113,6 @@ class PacienteController extends Controller
         $paciente->estado = 0;
         $paciente->update();
 
-        return redirect('/paciente/index')->with('Listo', 'Paciente eliminado correctamente');
+        return redirect('paciente')->with('Listo', 'Paciente eliminado correctamente');
     }
 }

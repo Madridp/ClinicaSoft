@@ -112,15 +112,15 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:users',
-            'email' => 'required|unique:users'
+            'name' => 'required|unique:users,name,'.$id,
+            'email' => 'required|unique:users,email,'.$id
             
         ]);
         
             $usuario= User::whereId($id)->update($validatedData);
 
         //si se edito el usuario
-        return redirect('/usuario/index')->with('Listo', 'Usuario editado correctamente');
+        return redirect('/usuario')->with('Listo', 'Usuario editado correctamente');
     }
 
     /**
@@ -134,11 +134,11 @@ class UsuarioController extends Controller
         $user = User::findOrFail($id);
         $id_au = Auth::id();
         if($user->id==$id_au){
-            return redirect('/usuario/index')->with('No se puede eliminar el usuario');
+            return redirect('/usuario')->with('No se puede eliminar el usuario');
         }else{
         $user->estado = 0; // eliminado
         $user->update();
         }
-        return redirect('/usuario/index')->with('Listo', 'Usuario eliminado correctamente');
+        return redirect('/usuario')->with('Listo', 'Usuario eliminado correctamente');
     }
 }

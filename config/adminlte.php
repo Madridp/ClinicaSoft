@@ -260,44 +260,44 @@ return [
         ],
         [
             'text' => 'Consultar usuarios',
-            'url'  => 'usuario/index',
+            'url'  => 'usuario',
             'icon' => "fa fa-user",
         ],
         ['header' => 'MÓDULOS'],
         [
             'text' => 'Pacientes',
-            'url'  => '/paciente/index',
+            'url'  => 'paciente',
             'icon' => "fa fa-users",
         ],
         [
             'text' => 'Inventario de insumos',
-            'url'  => 'insumo/index',
+            'url'  => 'insumo',
             'icon' => "fa fa-medkit",
         ],
         [
             'text' => 'Lote de insumos',
-            'url'  => 'loteInsumo/index',
+            'url'  => 'loteInsumo',
             'icon' => "fa fa-cart-plus",
         ],
         [
             'text' => 'Técnicos',
-            'url'  => 'tecnico/index',
+            'url'  => 'tecnico',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Médicos referentes',
-            'url'  => 'medicoReferente/index',
+            'url'  => 'medicoReferente',
             'icon' => "fa fa-address-book",
         ],
         [
             'text' => 'Proveedores',
-            'url'  => 'proveedor/index',
+            'url'  => 'proveedor',
             'icon' => "fa fa-user-circle",
         ],
        
         [
             'text'        => 'Exámenes',
-            'url'         => 'examen/index',
+            'url'         => 'examen',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',

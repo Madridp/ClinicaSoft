@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Usuario')
+@section('title', 'Editar Paciente')
 
 @section('content_header')
-    <h1>Editar usuario</h1>
+    <h1>Editar paciente</h1>
 @stop
 
 @section('content')
 
 <div class="card uper">
   <div class="card-header">
-    Editar Usuario
+    Editar Paciente
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -22,25 +22,36 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('usuario.update', $user->id ) }}">
+      <form method="post" action="{{ route('paciente.update', $paciente->id ) }}">
           <div class="form-group">
               @csrf
               @method('PATCH')
               <label for="country_name">Nombre:</label>
-              <input type="text" class="form-control" name="name" value="{{ $user->name }}"/>
+              <input type="text" class="form-control" name="nombre" value="{{ $paciente->nombre }}"/>
           </div>
           <div class="form-group">
-              <label for="cases">Email:</label>
-              <input type="text" class="form-control" name="email" value="{{ $user->email }}"/>
+              <label for="cases">Apellido:</label>
+              <input type="text" class="form-control" name="apellido" value="{{ $paciente->apellido }}"/>
           </div>
           <div class="form-group">
-            <label for="cases">Rol:</label>
-            <select class="form-control @error('id_rol') is-invalid @enderror" name="id_rol" id="id_rol">
-                @foreach($roles as $rol)
-                    <option value="{{ $rol->id }}{{"$rol->id==$user->id_rol ? 'selected':"}}">{{ $rol->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
+            <label for="cases">Fecha Nacimiento:</label>
+            <input type="date" class="form-control" name="fecha_nacimiento" value="{{ $paciente->fecha_nacimiento }}"/>
+          </div>
+          <div class="form-group">
+            <label for="cases">Genero:</label>
+            <select class="form-control @error('genero') is-invalid @enderror" name="genero" id="genero">
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="cases">Telefono:</label>
+            <input type="number" class="form-control" name="telefono" value="{{ $paciente->telefono }}"/>
+          </div>
+          <div class="form-group">
+            <label for="cases">Correo:</label>
+            <input type="email" class="form-control" name="correo" value="{{ $paciente->correo }}"/>
+          </div>
           <button type="submit" class="btn btn-primary">Actualizar</button>
           <a  href="javascript:history.back()" class="btn btn-danger">
             <span class="fas fa-undo"></span>

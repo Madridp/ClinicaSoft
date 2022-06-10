@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistroController;
+//use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\UsuarioController;
 
 /*
@@ -35,10 +35,10 @@ Route::middleware([
 });
 
 Route::resource('usuario', UsuarioController::class);
-Route::resource('tecnico', UsuarioController::class);
-Route::resource('proveedor', UsuarioController::class);
-Route::resource('paciente', UsuarioController::class);
-Route::resource('medicoReferente', UsuarioController::class);
-Route::resource('loteInsumo', UsuarioController::class);
-Route::resource('insumo', UsuarioController::class);
-Route::resource('examen', UsuarioController::class);
+Route::resource('tecnico', TecnicoController::class);
+Route::resource('proveedor', ProveedorController::class);
+Route::resource('paciente', PacienteController::class);
+Route::resource('medicoReferente', MedicoReferenteController::class);
+Route::resource('loteInsumo', LoteInsumoController::class);
+Route::resource('insumo', InsumoController::class);
+Route::resource('examen', ExamenController::class);
