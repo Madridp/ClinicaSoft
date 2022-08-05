@@ -1,0 +1,26 @@
+* {
+    font-size: 15px;
+    font-family: "Times New Roman";
+}
+.centrado {
+    text-align: center;
+    align-content: center;
+}
+
+.ticket {
+    width: 850px;
+    max-width: 320px;
+}
+
+.italico {
+    font-style: italic;
+    font-size: 14px;
+}
+
+img {
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    max-width: 130px;
+    width: 80px;
+}

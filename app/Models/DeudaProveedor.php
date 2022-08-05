@@ -9,6 +9,17 @@ class DeudaProveedor extends Model
 {
     use HasFactory;
 
+    public function proveedor()
+    {
+        return $this->hasOne(Proveedor::class,'id', 'id_proveedor');
+    }
+
+    public function compra()
+    {
+        return $this->hasOne(Compra::class,'id', 'id_compra');
+    }
+
+
     /**
      * The table associated with the model.
      *

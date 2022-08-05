@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\RegistroController;
@@ -41,4 +42,12 @@ Route::resource('paciente', PacienteController::class);
 Route::resource('medicoReferente', MedicoReferenteController::class);
 Route::resource('loteInsumo', LoteInsumoController::class);
 Route::resource('insumo', InsumoController::class);
+Route::resource('tipoInsumo', TipoInsumoController::class);
+Route::resource('tipoCompra', TipoCompraController::class);
+Route::resource('tipoExamen', TipoExamenController::class);
+Route::resource('procesoExamen', ProcesoExamenController::class);
+Route::get('compra/bitacora', 'CompraController@bitacora');
+Route::resource('compra', CompraController::class);
+Route::resource('deudaProveedor', DeudaProveedorController::class);
+Route::get('examen/bitacora', 'ExamenController@bitacora')->name('examen.bitacora');
 Route::resource('examen', ExamenController::class);

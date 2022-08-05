@@ -100,7 +100,7 @@
                 </div>
             </div>
             <select class="form-control @error('id_rol') is-invalid @enderror" name="id_rol" id="id_rol">
-                <option value="#">Seleccione un rol</option>
+                <option disabled selected>Seleccione un rol</option>
                 @foreach($roles as $rol)
                     <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                 @endforeach
@@ -113,10 +113,14 @@
         </div>
 
         {{-- Register button --}}
-        <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+        <button type="submit" class="btn {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
             Registrar nuevo usuario
         </button>
+        <a  href="{{ route('usuario.index')}}" class="btn btn-danger">
+            <span class="fas fa-undo"></span>
+            Cancelar
+        </a>
 
     </form>
 </div>

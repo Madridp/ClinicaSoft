@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class LoteInsumo extends Model
 {
     use HasFactory;
+    public function insumo()
+    {
+        return $this->hasOne(Insumo::class,'id', 'id_insumo');
+    }
 
     /**
      * The table associated with the model.

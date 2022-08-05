@@ -3,14 +3,14 @@
 @section('title', 'Editar Usuario')
 
 @section('content_header')
-    <h1>Editar usuario</h1>
+    <!--h1>Editar usuario</h1-->
 @stop
 
 @section('content')
 
 <div class="card uper">
   <div class="card-header">
-    Editar Usuario
+    <h3>Editar Usuario</h3>
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -39,19 +39,31 @@
           </div>
           <div class="form-group">
             <label for="cases">
+              
+              Cambiar contraseña: (Opcional)</label>
+            <input type="password" class="form-control" name="password" placeholder="Cambiar contraseña"/>
+        </div>
+        <div class="form-group">
+          <label for="cases">
+            
+            Confirmar contraseña: (Opcional)</label>
+          <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Contraseña"/>
+      </div>
+          <div class="form-group">
+            <label for="cases">
               <span class="input-group-addon" style="color:red; font-family: Verdana;">*</span>
               Rol:</label>
             <select class="form-control @error('id_rol') is-invalid @enderror" name="id_rol" id="id_rol">
                 @foreach($roles as $rol)
-                    <option value="{{ $rol->id }}{{"$rol->id==$user->id_rol ? 'selected':"}}">{{ $rol->nombre }}</option>
+                    <option value="{{ $rol->id }}" {{ $rol->id==$user->id_rol ? 'selected':'' }}>{{ $rol->nombre }}</option>
                 @endforeach
             </select>
         </div>
           <button type="submit" class="btn btn-primary">Actualizar</button>
 
-          <a  href="javascript:history.back()" class="btn btn-danger">
+          <a  href="{{ route('usuario.index')}}" class="btn btn-danger">
             <span class="fas fa-undo"></span>
-            Regresar
+            Cancelar
         </a>
       </form>
       
