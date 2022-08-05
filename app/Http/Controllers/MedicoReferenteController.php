@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicoReferente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedicoReferenteController extends Controller
 {
@@ -11,9 +13,20 @@ class MedicoReferenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth'); // el usuario debe estar autenticado
+    }
     public function index()
     {
-        //
+        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+            return redirect()->route('admin');
+        }
+        $medicos = MedicoReferente::where('estado', '=', 1)->get();
+
+        return view('medicoReferente.index', [
+            'medicos' => $medicos
+        ]);
     }
 
     /**
@@ -23,7 +36,10 @@ class MedicoReferenteController extends Controller
      */
     public function create()
     {
-      
+        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+            return redirect()->route('admin');
+        }
+        return view('medicoReferente.create');
     }
 
     /**
@@ -34,7 +50,13 @@ class MedicoReferenteController extends Controller
      */
     public function store(Request $request)
     {
-      
+        $this->validate($request,[
+            'nombre' => 'required',
+          ]);
+    
+          $medicos=MedicoReferente::create($request->all());
+    
+          return redirect('medicoReferente')->with('Listo', 'medico creado correctamente');
     }
 
     /**
@@ -56,7 +78,14 @@ class MedicoReferenteController extends Controller
      */
     public function edit($id)
     {
-        //
+        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+            return redirect()->route('admin');
+        }
+        $medico = MedicoReferente::findOrFail($id);
+
+        return view('medicoReferente.edit', [
+            'medico' => $medico
+        ]);
     }
 
     /**
@@ -68,7 +97,13 @@ class MedicoReferenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+        ]);
+
+        $medicos= MedicoReferente::whereId($id)->update($validatedData);
+
+        return redirect('medicoReferente')->with('Listo', 'medico editado correctamente');
     }
 
     /**
@@ -79,6 +114,11 @@ class MedicoReferenteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $medico = MedicoReferente::findOrFail($id);
+        
+        $medico->estado = 0;
+        $medico->update();
+
+        return redirect('medicoReferente')->with('Listo', 'medico eliminado correctamente');
     }
 }

@@ -1,0 +1,54 @@
+* {
+    font-size: 18px;
+    font-family: "Times New Roman";
+}
+.centrado {
+    text-align: center;
+    align-content: center;
+}
+.titulo {
+    
+    font-size: 23px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #241D92;
+    text-align: center;
+    align-content: center;
+    font-style: inherit;
+}
+.linea{
+    size: 5px;
+    color: #241D92;
+}
+
+.izquierdo {
+    text-align: left;
+    align-content: left;
+}
+
+.derecho {
+    color: #241D92;
+    text-align: right;
+    align-content: right;
+}
+
+.ticket {
+    height: 800px;
+    width: 1000px;
+    max-width: 1800px;
+}
+
+.italico {
+    color: #241D92;
+    font-style: italic;
+    font-size: 18px;
+    
+}
+
+img {
+    /*align-content: left;
+    align-self: left;
+    align-items: left;*/
+    max-width: 210px;
+    height: 177px;
+    width: 180px;
+}

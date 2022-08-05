@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
@@ -66,10 +67,22 @@ class User extends Authenticatable
     ];
 
     public function adminlte_image(){
-        return 'https://picsum.photos/300/300';
+
+        if (Auth::user()->id_rol == 2) {
+            return '/img/avatarm.jpg';
+        }elseif(Auth::user()->id_rol == 3){
+            return '/img/avatarp.png';
+        }
+        return '/img/avatar.jpg';
+       // return 'resources/img/usuario.jpg';
     }
 
     public function adminlte_desc(){
+        if (Auth::user()->id_rol == 2) {
+            return "Secretario";
+        }elseif(Auth::user()->id_rol == 3){
+            return "Técnico";
+        }
         return "Administrador";
     }
 

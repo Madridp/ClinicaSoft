@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Compra extends Model
 {
+    public function proveedor()
+    {
+        return $this->hasOne(Proveedor::class,'id', 'id_proveedor');
+    }
+
+    public function tipo_compra()
+    {
+        return $this->hasOne(TipoCompra::class,'id', 'id_tipo_compra');
+    }
+
+
     use HasFactory;
 
     /**

@@ -7,6 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Examen extends Model
 {
+
+    public function paciente()
+    {
+        return $this->hasOne(Paciente::class,'id', 'id_paciente');
+    }
+    public function tecnico()
+    {
+        return $this->hasOne(Tecnico::class,'id', 'id_tecnico');
+    }
+    public function medico_referente()
+    {
+        return $this->hasOne(MedicoReferente::class,'id', 'id_medico_referente');
+    }
+    public function tipo_examen()
+    {
+        return $this->hasOne(TipoExamen::class,'id', 'id_tipo_examen');
+    }
     use HasFactory;
 
     /**

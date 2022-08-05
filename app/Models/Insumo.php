@@ -9,6 +9,11 @@ class Insumo extends Model
 {
     use HasFactory;
 
+    public function tipo_insumo()
+    {
+        return $this->hasOne(TipoInsumo::class,'id', 'id_tipo_insumo');
+    }
+
     /**
      * The table associated with the model.
      *

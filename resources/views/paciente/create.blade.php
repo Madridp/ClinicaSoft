@@ -3,23 +3,29 @@
 @section('title', 'Registrar nuevo paciente')
 
 @section('content_header')
-    <h1>Registrar paciente</h1>
+    <!--h1>Registrar paciente</h1-->
 @stop
 
 @section('content')
+<div class="card uper">
+    <div class="card-header">
+        <h3>Registrar Paciente</h3>
+      </div>
+    <div class="card-body">
     <form action="{{ route('paciente.store') }}" method="post">
         @csrf
 
         {{-- Nombre field --}}
         <div class="input-group mb-3">
-            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
-                value="{{ old('nombre') }}" placeholder="Nombre" autofocus>
-
             <div class="input-group-append">
                 <div class="input-group-text">
+                    <span class="input-group-addon" style="color:red; font-family: Verdana;">*</span>
                     <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
+            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
+                value="{{ old('nombre') }}" placeholder="Nombre" autofocus>
+
 
             @error('nombre')
                 <span class="invalid-feedback" role="alert">
@@ -30,14 +36,16 @@
 
         {{-- Apellido field --}}
         <div class="input-group mb-3">
-            <input type="text" name="apellido" class="form-control @error('apellido') is-invalid @enderror"
-                value="{{ old('apellido') }}" placeholder="Apellido">
-
             <div class="input-group-append">
                 <div class="input-group-text">
+                    <span class="input-group-addon" style="color:red; font-family: Verdana;">*</span>
                     <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
+            <input type="text" name="apellido" class="form-control @error('apellido') is-invalid @enderror"
+                value="{{ old('apellido') }}" placeholder="Apellido">
+
+           
 
             @error('apellido')
                 <span class="invalid-feedback" role="alert">
@@ -48,14 +56,15 @@
 
        {{-- Fecha de nacimiento field--}}
        <div class="input-group mb-3">
-            <input type="date" name="fecha_nacimiento" class="form-control @error('fecha_nacimiento') is-invalid @enderror"
-                value="{{ old('fecha_nacimiento') }}" placeholder="Fecha de Nacimiento">
-
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-calendar-alt {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control @error('fecha_nacimiento') is-invalid @enderror"
+                value="{{ old('fecha_nacimiento') }}" placeholder="Fecha de Nacimiento">
+
+            
 
             @error('fecha_nacimiento')
                 <span class="invalid-feedback" role="alert">
@@ -65,13 +74,17 @@
         </div>
         {{-- Genero field--}}
         <div class="input-group mb-3">
-            <p>
-                Género:
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="input-group-addon" style="color:red; font-family: Verdana;">*</span>
+                    <span class="fa fa-venus-mars {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
                 <select class="form-control @error('genero') is-invalid @enderror" name="genero" id="genero">
-                    <option value="masculino">Masculino</option>
-                    <option value="femenino">Femenino</option>
+                    <option disabled selected>Seleccione un Género</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
                 </select>
-            </p>
 
             @error('genero')
                 <span class="invalid-feedback" role="alert">
@@ -81,14 +94,16 @@
         </div>
         {{-- Telefono field--}}
        <div class="input-group mb-3">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="input-group-addon" style="color:red; font-family: Verdana;">*</span>
+                    <span class="fa fa-phone-square {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
             <input type="number" name="telefono" class="form-control @error('telefono') is-invalid @enderror"
                 value="{{ old('telefono') }}" placeholder="Telefono">
 
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fa-solid fa-phone {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
+          
 
             @error('telefono')
                 <span class="invalid-feedback" role="alert">
@@ -98,14 +113,15 @@
         </div>
         {{-- correo field--}}
        <div class="input-group mb-3">
-            <input type="email" name="correo" class="form-control @error('correo') is-invalid @enderror"
-                value="{{ old('correo') }}" placeholder="Correo">
-
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
+            <input type="email" name="correo" class="form-control @error('correo') is-invalid @enderror"
+                value="{{ old('correo') }}" placeholder="Correo">
+
+           
 
             @error('correo')
                 <span class="invalid-feedback" role="alert">
@@ -116,12 +132,19 @@
         
 
         {{-- Register button --}}
-        <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+        <button type="submit" class="btn {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
             Registrar paciente
         </button>
 
+        <a  href="{{ route('paciente.index')}}" class="btn btn-danger">
+            <span class="fas fa-undo"></span>
+            Cancelar
+        </a>
+
     </form>
+</div>
+</div>
 @stop
 
 @section('css')

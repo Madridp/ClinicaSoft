@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
 {
@@ -12,8 +13,16 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth'); // el usuario debe estar autenticado
+    }
     public function index()
     {
+        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+            return redirect()->route('admin');
+        }
+        //dd('aca LLEGA JEJE');
         $pacientes = Paciente::where('estado', '=', 1)->get();
 
         return view('paciente.index', [
@@ -28,6 +37,9 @@ class PacienteController extends Controller
      */
     public function create()
     {
+        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+            return redirect()->route('admin');
+        }
       return view('paciente.create');
     }
 
@@ -46,9 +58,9 @@ class PacienteController extends Controller
         'telefono' => 'required',
       ]);
 
-      $paciente=Paciente::create($request->validate());
+      $paciente=Paciente::create($request->all());
 
-      return redirect('/paciente/index')->with('Listo', 'paciente creado correctamente');
+      return redirect('paciente')->with('Listo', 'paciente creado correctamente');
 
     }
 
@@ -71,6 +83,9 @@ class PacienteController extends Controller
      */
     public function edit($id)
     {
+        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+            return redirect()->route('admin');
+        }
         $paciente = Paciente::findOrFail($id);
 
         return view('paciente.edit', [
@@ -90,13 +105,15 @@ class PacienteController extends Controller
         $validatedData = $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
+            'fecha_nacimiento' => 'nullable',
             'genero' => 'required',
             'telefono' => 'required',
+            'correo' => 'nullable'
         ]);
 
         $paciente= Paciente::whereId($id)->update($validatedData);
 
-        return redirect('/usuario/index')->with('Listo', 'Paciente editado correctamente');
+        return redirect('paciente')->with('Listo', 'Paciente editado correctamente');
     }
 
     /**
@@ -112,6 +129,6 @@ class PacienteController extends Controller
         $paciente->estado = 0;
         $paciente->update();
 
-        return redirect('/paciente/index')->with('Listo', 'Paciente eliminado correctamente');
+        return redirect('paciente')->with('Listo', 'Paciente eliminado correctamente');
     }
 }

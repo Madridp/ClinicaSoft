@@ -69,7 +69,7 @@ return [
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => true,
     'usermenu_desc' => true,
-    'usermenu_profile_url' => true,
+    'usermenu_profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-success elevation-4',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -188,10 +188,11 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
+    //'password_reset_url' => 'password/reset',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
@@ -229,7 +230,7 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -257,62 +258,132 @@ return [
             'text' => 'Crear un nuevo usuario',
             'url'  => 'usuario/create',
             'icon' => "fa fa-user-plus",
+            'can'  => 'usuario-create'
         ],
         [
             'text' => 'Consultar usuarios',
-            'url'  => 'usuario/index',
+            'url'  => 'usuario',
             'icon' => "fa fa-user",
         ],
         ['header' => 'MÓDULOS'],
         [
             'text' => 'Pacientes',
-            'url'  => '/paciente/index',
+            'url'  => 'paciente',
             'icon' => "fa fa-users",
-        ],
-        [
-            'text' => 'Inventario de insumos',
-            'url'  => 'insumo/index',
-            'icon' => "fa fa-medkit",
-        ],
-        [
-            'text' => 'Lote de insumos',
-            'url'  => 'loteInsumo/index',
-            'icon' => "fa fa-cart-plus",
+            'can'  => 'paciente'
         ],
         [
             'text' => 'Técnicos',
-            'url'  => 'tecnico/index',
+            'url'  => 'tecnico',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'tecnico'
         ],
         [
             'text' => 'Médicos referentes',
-            'url'  => 'medicoReferente/index',
+            'url'  => 'medicoReferente',
             'icon' => "fa fa-address-book",
+            'can'  => 'medicoReferente'
         ],
         [
-            'text' => 'Proveedores',
-            'url'  => 'proveedor/index',
-            'icon' => "fa fa-user-circle",
+            'text' => 'Insumos',
+            //'url'  => 'insumo',
+            'icon' => "fa fa-medkit",
+            'can'  => 'insumo',
+            'submenu' => [
+                [
+                    'text' => 'Inventario Insumos',
+                    'url'  => 'insumo',
+                    'icon' => "fas fa-dolly",
+                ],
+                [
+                    'text' => 'Tipo Insumos',
+                    'url'  => 'tipoInsumo',
+                    'icon' => "fas fa-briefcase-medical",
+                ],
+                
+            ]
         ],
-       
         [
-            'text'        => 'Exámenes',
-            'url'         => 'examen/index',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => 'Compras',
+            //'url'  => 'insumo',
+            'icon' => "	fas fa-money-check-alt",
+            'can'  => 'compra',
+            'submenu' => [
+                [
+                    'text' => 'Realizar Compra',
+                    'url'  => 'compra',
+                    'icon' => "fas fa-shopping-cart",
+                ],
+                [
+                    'text' => 'Bitacora Compras',
+                    'url'  => 'compra/bitacora',
+                    'icon' => "fas fa-dolly-flatbed",
+                ],
+                [
+                    'text' => 'Tipo de Compra',
+                    'url'  => 'tipoCompra',
+                    'icon' => "	fas fa-cart-plus",
+                ],
+                [
+                    'text' => 'Deuda Proveedor',
+                    'url'  => 'deudaProveedor',
+                    'icon' => "fas fa-coins",
+                ],
+                [
+                    'text' => 'Proveedores',
+                    'url'  => 'proveedor',
+                    'icon' => "fa fa-user-circle",
+                ],
+            ]
         ],
-        ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
+            'text' => 'Exámenes',
+            //'url'  => 'insumo',
+            'icon' => "fas fa-file-invoice",
+            'submenu' => [
+                [
+                    'text'        => 'Exámenes',
+                    'url'         => 'examen',
+                    'icon'        => 'far fa-fw fa-file',
+                    //'label'       => 4,
+                    //'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Bitácora Exámenes',
+                    'url'  => 'examen/bitacora',
+                    'icon' => "fas fa-archive",
+                ],
+                [
+                    'text' => 'Tipo de Examen',
+                    'url'  => 'tipoExamen',
+                    'icon' => "fas fa-sticky-note",
+                ],
+               // [
+                 //   'text' => 'Proceso Examen',
+                   // 'url'  => 'procesoExamen',
+                   // 'icon' => "fas fa-archive",
+                //],
+            ]
+        ],
+      //  [
+          //  'text' => 'Lote de insumos',
+           // 'url'  => 'loteInsumo',
+          //  'icon' => "fa fa-cart-plus",
+      //  ],
+        
+        
+       // ['header' => 'CONFIGURACIÓN DE CUENTA'],
+       /* [
             'text' => 'profile',
             'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
+        ],*/
+       /* [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => 'password/reset',
             'icon' => 'fas fa-fw fa-lock',
-        ],
+            
+        ],*/
        /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
