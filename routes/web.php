@@ -1,10 +1,23 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\ExamenController;
+use App\Http\Controllers\InsumoController;
+use App\Http\Controllers\LoteInsumoController;
+use App\Http\Controllers\MedicoReferenteController;
+use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ProcesoExamenController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\TipoCompraController;
+use App\Http\Controllers\TipoExamenController;
+use App\Http\Controllers\TipoInsumoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\UsuarioController;
+use App\Models\DeudaProveedor;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +48,17 @@ Route::middleware([
     })->name('dashboard');
 });
 
+// Route::get('login', function(){
+//     return view('auth.login');
+// })->name('login');
+
+Auth::routes([
+    'register' => false, // Registration Routes...
+    // 'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
+
+
 Route::resource('usuario', UsuarioController::class);
 Route::resource('tecnico', TecnicoController::class);
 Route::resource('proveedor', ProveedorController::class);
@@ -46,8 +70,10 @@ Route::resource('tipoInsumo', TipoInsumoController::class);
 Route::resource('tipoCompra', TipoCompraController::class);
 Route::resource('tipoExamen', TipoExamenController::class);
 Route::resource('procesoExamen', ProcesoExamenController::class);
-Route::get('compra/bitacora', 'CompraController@bitacora');
+Route::get('compra/bitacora', [CompraController::class, 'bitacora']);
 Route::resource('compra', CompraController::class);
-Route::resource('deudaProveedor', DeudaProveedorController::class);
-Route::get('examen/bitacora', 'ExamenController@bitacora')->name('examen.bitacora');
+Route::resource('deudaProveedor', DeudaProveedor::class);
+Route::get('examen/bitacora', [ExamenController::class, 'bitacora'])->name('examen.bitacora');
 Route::resource('examen', ExamenController::class);
+
+Route::get('admin', [HomeController::class, 'index'])->name('admin');
