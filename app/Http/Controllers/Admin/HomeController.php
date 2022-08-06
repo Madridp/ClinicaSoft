@@ -15,6 +15,15 @@ use Nette\Utils\Json;
 
 class HomeController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('auth'); // el usuario debe estar autenticado
+    }
 
     public function index(){
         $users = User::where('estado', '=', 1)->count();
@@ -25,14 +34,14 @@ class HomeController extends Controller
 
         function devolverDiaSemanaExiste($arreglo, $diaSemana)
         {
-           
+
             foreach($arreglo as $dia)
             {
                 if ( $dia['diaSemana'] == $diaSemana ){
                     return $dia['count'];
                 }
             }
-            
+
             return 0;
         }
 
