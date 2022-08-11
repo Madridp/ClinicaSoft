@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as AccessGate;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Builder::defaultStringLength(191);
+        
         //
         Gate::define('usuario-create', function ($user) {
             if ($user->id_rol == '1') {
