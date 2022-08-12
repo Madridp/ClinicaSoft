@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\DeudaProveedorController;
 use App\Http\Controllers\ExamenController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\LoteInsumoController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\UsuarioController;
-use App\Models\DeudaProveedor;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,7 +73,7 @@ Route::resource('tipoExamen', TipoExamenController::class);
 Route::resource('procesoExamen', ProcesoExamenController::class);
 Route::get('compra/bitacora', [CompraController::class, 'bitacora']);
 Route::resource('compra', CompraController::class);
-Route::resource('deudaProveedor', DeudaProveedor::class);
+Route::resource('deudaProveedor', DeudaProveedorController::class);
 Route::get('examen/bitacora', [ExamenController::class, 'bitacora'])->name('examen.bitacora');
 Route::resource('examen', ExamenController::class);
 

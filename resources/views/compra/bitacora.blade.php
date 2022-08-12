@@ -119,11 +119,11 @@
  
         });
     </script>
-    <script>
+    <!--script>
     document.querySelector("#btn1").addEventListener('click', function(){
         Swal
     .fire({
-        title: "Compra {{$compra->id}}",
+        title: "Compra ",
         text: "¿Eliminar?",
         icon: 'warning',
         showCancelButton: true,
@@ -140,5 +140,5 @@
         }
     });
     });
-    </script>
+    </script-->
 @stop

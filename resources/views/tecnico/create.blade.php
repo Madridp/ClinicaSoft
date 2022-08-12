@@ -115,7 +115,7 @@
         {{-- Register button --}}
         <button type="submit" class="btn {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
-            Registrar paciente
+            Registrar técnico
         </button>
 
         <a  href="{{ route('tecnico.index')}}" class="btn btn-danger">

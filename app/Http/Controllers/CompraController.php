@@ -233,7 +233,7 @@ class CompraController extends Controller
         $compras = Compra::where('estado', '=', 1)->get();
 
         return view('compra.bitacora', [
-            'compras' => $compras
+            'compras' => $compras,
         ]);
    }
 }

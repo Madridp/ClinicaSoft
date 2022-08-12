@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeudaProveedor extends Model
 {
-    use HasFactory;
+    
 
     public function proveedor()
     {
@@ -20,6 +20,7 @@ class DeudaProveedor extends Model
     }
 
 
+    use HasFactory;
     /**
      * The table associated with the model.
      *

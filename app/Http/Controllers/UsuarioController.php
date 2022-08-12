@@ -73,7 +73,7 @@ class UsuarioController extends Controller
 
         //si se registro el usuario
         if($usuario){
-            return redirect()->route('admin');}else{
+            return redirect()->route('usuario.index');}else{
                 return redirect()->back();
             }
     }

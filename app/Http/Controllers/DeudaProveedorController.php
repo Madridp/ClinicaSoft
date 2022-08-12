@@ -16,13 +16,17 @@ class DeudaProveedorController extends Controller
     }
     public function index()
     {
+        //return response()->json("ENTRA");
         if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
             return redirect()->route('admin');
         }
+        
         $deudaProveedor = DeudaProveedor::where('estado', '=', 1)->get();
 
         $compra = Compra::all();
         $proveedor = Proveedor::all();
+
+        
        
         return view('deudaProveedor.index', [
             'compra' => $compra,
