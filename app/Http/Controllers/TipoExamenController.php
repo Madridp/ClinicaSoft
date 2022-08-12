@@ -19,9 +19,9 @@ class TipoExamenController extends Controller
     }
     public function index()
     {
-        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+       /* if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
             return redirect()->route('admin');
-        }
+        }*/
         //dd('aca LLEGA JEJE');
         $tipoExamenes = TipoExamen::where('estado', '=', 1)->get();
 
@@ -37,9 +37,9 @@ class TipoExamenController extends Controller
      */
     public function create()
     {
-        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+     /*   if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
             return redirect()->route('admin');
-        }
+        }*/
       return view('tipoExamen.create');
     }
 
@@ -80,9 +80,9 @@ class TipoExamenController extends Controller
      */
     public function edit($id)
     {
-        if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
+       /* if ( Auth::user()->id_rol == 3 ){ // si el usuarsio autenticado no es administrador, bloquear acceso
             return redirect()->route('admin');
-        }
+        }*/
         $tipoExamen = TipoExamen::findOrFail($id);
 
         return view('tipoExamen.edit', [
